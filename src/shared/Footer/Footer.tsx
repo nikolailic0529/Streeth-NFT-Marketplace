@@ -96,16 +96,16 @@ const Footer: React.FC = () => {
               contact
             </a>
           </li>
-          <li>
+          {/* <li>
             <a href="https://streeth.io/#">platform</a>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <a href="https://github.com/coinscope-co/audits/blob/main/streeth/audit.pdf">
               audit
             </a>
-          </li>
+          </li> */}
           <li>
-            <a href="https://streeth.io/terms/">terms & policis</a>
+            <a href="https://streeth.io/terms/">terms</a>
           </li>
           <li>
             <a href="https://streethers.com/">streethers</a>

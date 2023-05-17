@@ -48,7 +48,7 @@ const SectionVideos: FC<SectionVideosProps> = ({
           //   className="rounded-3xl"
           // ></iframe>
           <video className="w-full h-full" playsInline autoPlay muted loop>
-            <source src="https://www.file.io/7Re4/download/aKqqKeuvHR50" type="video/mp4" />
+            <source src="https://vimeo.com/827679705?share=copy" type="video/mp4" />
             our browser does not support the video tag.
           </video>
         ) : (
@@ -74,11 +74,8 @@ const SectionVideos: FC<SectionVideosProps> = ({
 
   return (
     <div className={`nc-SectionVideos ${className}`}>
-      <Heading
-        desc="Check out our hottest videos. View more and share more new
-          perspectives on just about any topic. Everyone’s welcome."
-      >
-        🎬 The Videos
+      <Heading desc="Visit our ecosystem, immerge yourself into our vision, become part of our mission and connect with us on socials">
+        Streeth's World
       </Heading>
 
       <div className="flex flex-col relative sm:pr-4 sm:py-4 md:pr-6 md:py-6 xl:pr-14 xl:py-14 lg:flex-row">

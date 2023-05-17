@@ -17,10 +17,9 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = "" }) => {
       data-nc-id="SectionSubscribe2"
     >
       <div className="flex-shrink-0 mb-10 lg:mb-0 lg:mr-10 lg:w-2/5">
-        <h2 className="font-semibold text-4xl">Never miss a drop!</h2>
+        <h2 className="font-semibold text-4xl">Never miss a news!</h2>
         <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
-          Subcribe to our super-exclusive drop list and be the first to know
-          abour upcoming drops
+          Subscribe to our news & drops list and be the first to know !
         </span>
         {/* <ul className="space-y-4 mt-10">
           <li className="flex items-center space-x-4">

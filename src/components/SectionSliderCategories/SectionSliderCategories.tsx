@@ -21,13 +21,7 @@ const ntfsCatNames = [
   "Technology",
 ];
 
-const nftsDates = [
-  "2023.5.23",
-  "2023.6.14",
-  "2023.7.11",
-  "2023.8.9",
-  "2023.9.30",
-]
+const nftsDates = ["Q3 2023", "2Q4 2024", "TBA", "TBA", "TBA"];
 
 const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
   heading = "Upcoming Streeth NFTs Drops",
@@ -80,9 +74,7 @@ const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
   return (
     <div className={`nc-SectionSliderCategories ${className}`}>
       <div className={`${UNIQUE_CLASS} flow-root`} ref={sliderRef}>
-        <Heading desc={subHeading}>
-          {heading}
-        </Heading>
+        <Heading desc={subHeading}>{heading}</Heading>
         <div className="glide__track" data-glide-el="track">
           <ul className="glide__slides">
             {[1, 1, 1, 1, 1].map((item, index) => (

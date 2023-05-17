@@ -32,8 +32,7 @@ const CardCategory5: FC<CardCategory5Props> = ({
   index,
 }) => {
   return (
-    <Link
-      to={"/page-collection"}
+    <div
       className={`nc-CardCategory5 flex flex-col ${className}`}
       data-nc-id="CardCategory5"
     >
@@ -61,7 +60,7 @@ const CardCategory5: FC<CardCategory5Props> = ({
           </span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
