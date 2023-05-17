@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
       <div className="my-20 ">
         <ul className="flex items-center justify-center gap-6 flex-col md:flex-row text-sm text-black">
           <li>
-            <a href="https://etherscan.io/token/0xB840d10D840eF47c233FEC1fd040F5B145a6DfA5">
+            <a href="https://streeth.io/contact/">
               contact
             </a>
           </li>
