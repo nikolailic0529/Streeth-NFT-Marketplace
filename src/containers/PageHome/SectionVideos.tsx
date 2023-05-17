@@ -48,7 +48,7 @@ const SectionVideos: FC<SectionVideosProps> = ({
           //   className="rounded-3xl"
           // ></iframe>
           <video className="w-full h-full" playsInline autoPlay muted loop>
-            <source src="https://vimeo.com/827679705?share=copy" type="video/mp4" />
+            <source src="https://streamable.com/46j8zo" type="video/mp4" />
             our browser does not support the video tag.
           </video>
         ) : (
