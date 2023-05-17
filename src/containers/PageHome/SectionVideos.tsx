@@ -52,7 +52,7 @@ const SectionVideos: FC<SectionVideosProps> = ({
           //   <source src="https://streamable.com/46j8zo" type="video/mp4" />
           //   our browser does not support the video tag.
           // </video>
-          <ReactPlayer url="https://streamable.com/46j8zo" controls />
+          <ReactPlayer url="https://streamable.com/46j8zo" controls height="100%" width="100%" />
         ) : (
           <>
             <div
