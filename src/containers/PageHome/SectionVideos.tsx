@@ -3,6 +3,7 @@ import NcImage from "shared/NcImage/NcImage";
 import NcPlayIcon from "shared/NcPlayIcon/NcPlayIcon";
 import React, { FC, useState } from "react";
 import isSafariBrowser from "utils/isSafariBrowser";
+import ReactPlayer from "react-player";
 
 export interface VideoType {
   id: string;
@@ -47,10 +48,11 @@ const SectionVideos: FC<SectionVideosProps> = ({
           //   allowFullScreen
           //   className="rounded-3xl"
           // ></iframe>
-          <video className="w-full h-full" playsInline autoPlay muted loop>
-            <source src="https://streamable.com/46j8zo" type="video/mp4" />
-            our browser does not support the video tag.
-          </video>
+          // <video className="w-full h-full" playsInline autoPlay muted loop>
+          //   <source src="https://streamable.com/46j8zo" type="video/mp4" />
+          //   our browser does not support the video tag.
+          // </video>
+          <ReactPlayer url="https://streamable.com/46j8zo" controls />
         ) : (
           <>
             <div
