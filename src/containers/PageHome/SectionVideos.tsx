@@ -39,7 +39,8 @@ const SectionVideos: FC<SectionVideosProps> = ({
         className="group aspect-w-16 aspect-h-16 sm:aspect-h-9 bg-neutral-800 rounded-3xl overflow-hidden border-4 border-white dark:border-neutral-900 sm:rounded-[50px] sm:border-[10px] z-0"
         title={video.title}
       >
-        {isPlay ? (
+        <ReactPlayer url="https://streamable.com/46j8zo" muted={true} loop={true} height="100%" width="100%" />
+        {/* {isPlay ? (
           // <iframe
           //   src = "./nft.mp4"
           //   title={video.title}
@@ -69,7 +70,7 @@ const SectionVideos: FC<SectionVideosProps> = ({
               alt={video.title}
             />
           </>
-        )}
+        )} */}
       </div>
     );
   };
