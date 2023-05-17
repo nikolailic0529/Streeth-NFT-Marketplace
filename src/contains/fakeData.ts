@@ -36,11 +36,11 @@ import nftsCat4 from "images/nfts/cat4.png";
 import nftsCat5 from "images/nfts/cat5.png";
 import nftsCat6 from "images/nfts/cat6.png";
 //
-import nftsDrop1 from "images/nfts/drop1.png";
-import nftsDrop2 from "images/nfts/drop2.png";
-import nftsDrop3 from "images/nfts/drop3.png";
-import nftsDrop4 from "images/nfts/drop4.png";
-import nftsDrop5 from "images/nfts/drop5.png";
+import nftsDrop1 from "images/nfts/d1.jpg";
+import nftsDrop2 from "images/nfts/d2.jpg";
+import nftsDrop3 from "images/nfts/d3.jpg";
+import nftsDrop4 from "images/nfts/d4.jpg";
+import nftsDrop5 from "images/nfts/d5.jpg";
 
 export const nftsCatImgs = [
   nftsCat1,

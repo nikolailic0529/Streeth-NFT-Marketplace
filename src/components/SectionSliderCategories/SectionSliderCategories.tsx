@@ -21,7 +21,7 @@ const ntfsCatNames = [
   "Technology",
 ];
 
-const nftsDates = ["Q3 2023", "2Q4 2024", "TBA", "TBA", "TBA"];
+const nftsDates = ["Q3 2023", "Q4 2023", "TBA", "TBA", "TBA"];
 
 const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
   heading = "Upcoming Streeth NFTs Drops",
