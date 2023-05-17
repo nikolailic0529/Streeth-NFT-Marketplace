@@ -1,0 +1,27 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 64 64"
+        width="32"
+        height="32"
+      >
+        <defs>
+          <path id="a" d="M0 0h64v64H0z"></path>
+          <path id="c" d="M0 64h64V0H0z"></path>
+        </defs>
+        <g fill="none" fill-rule="evenodd">
+          <g>
+            <mask id="b" fill="#fff">
+            <use href="#a"></use>
+            </mask>
+            <path
+              fill="#181818"
+              d="M45.4 0H18.6A18.6 18.6 0 0 0 0 18.6v26.8C0 55.7 8.3 64 18.6 64h26.8C55.7 64 64 55.7 64 45.4V18.6C64 8.3 55.7 0 45.4 0"
+              mask="url(#b)"
+            ></path>
+          </g>
+          <path
+            fill="#FFF"
+            d="M50 27.6h-1a11 11 0 0 1-9.1-5v17A12.4 12.4 0 1 1 27.4 27h.8v6.2l-.8-.1a6.4 6.4 0 0 0 0 12.7c3.5 0 6.6-2.8 6.6-6.3V11h6a11 11 0 0 0 10 9.8v6.8"
+          ></path>
+        </g>
+      </svg>

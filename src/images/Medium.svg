@@ -1,0 +1,24 @@
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        id="Layer_1"
+        x="0px"
+        y="0px"
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+      >
+        <g id="Ig" transform="translate(174.000000, 0.000000)">
+          {" "}
+          <path
+            id="Fill-120-Copy"
+                      fill="#181818"
+          fill-rule="evenodd"
+          clip-rule= "evenodd"
+            d="M-174,8.4c0-4.6,3.8-8.4,8.4-8.4h15.3c4.6,0,8.4,3.8,8.4,8.4l0,15.3c0,4.6-3.8,8.4-8.4,8.4   h-15.3c-4.6,0-8.4-3.8-8.4-8.4V8.4z"
+          ></path>{" "}
+          <path
+            fill="#fff"
+            d="M-166.9,8.2l1.7,2.1v10.2l-2.5,3.3h5.9l-2.5-3.3v-9.1l5.5,12.3l0,0l5.1-12.4v10.7l-1.7,1.7h7.2l-1.7-1.7l0-12   l1.6-1.9h-5.1l-3.9,9.6l-4.3-9.6H-166.9z"
+          ></path>
+        </g>
+      </svg>
