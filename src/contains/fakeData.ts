@@ -37,7 +37,7 @@ import nftsCat5 from "images/nfts/cat5.png";
 import nftsCat6 from "images/nfts/cat6.png";
 //
 import nftsDrop1 from "images/nfts/d1.jpg";
-import nftsDrop2 from "images/nfts/d2.jpg";
+import nftsDrop2 from "images/nfts/d2.png";
 import nftsDrop3 from "images/nfts/d3.jpg";
 import nftsDrop4 from "images/nfts/d4.jpg";
 import nftsDrop5 from "images/nfts/d5.jpg";

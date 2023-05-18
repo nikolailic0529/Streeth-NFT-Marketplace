@@ -138,21 +138,27 @@ const SectionSliderCollections2: FC<SectionSliderCollections2Props> = ({
             <li className={`glide__slide`}>
               <MyCollectionCard
                 imgs={[
-                  "https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-                  "https://images.unsplash.com/photo-1599054802207-91d346adc120?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                  "https://images.unsplash.com/photo-1581985673473-0784a7a44e39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-                  "https://images.unsplash.com/photo-1557264305-7e2764da873b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
+                  "https://i.seadn.io/gae/D64DlEXdabaYUviwz5KsUv9kcSZlm4zX9BSQFgLdQRkWgRlSSt6vM1NLtbI01F5uIoubD1xocjGxgWKCgx6X_QPIZYIp1Rm8kFFCkg?auto=format&dpr=1&w=1000",
+                  "https://i.seadn.io/gae/i9Ckry81OCSoaIrY2nl62qAP3mDPxJcsCM3lSM5Wp82-0ADZpLwlhTGZKVjLh_NYuC9Y8Vs60hZykJtXyoGLAjrKLT9Fb2dcT8UYCw?auto=format&dpr=1&w=384",
+                  "https://i.seadn.io/gae/3aOPd0gV_lBNeQrCI8rjvnsv2dVEDltpepMx1MBgwlRyqWD_rQbx8Xq3oB_z3sqhheMp1g2FwxSZju_ODq3IgTa9Z2zMxyRvKormCDU?auto=format&dpr=1&w=384",
+                  "https://i.seadn.io/gae/hLaWVY69FBLEBt-ZsaOkVGalwuA5jP1NotiPS1yT-EFVAIUvpXqBAwnQRi3UTTn20Us-elC53zUfKnidOYrMOi6RNht7S2A-Dl4XMA?auto=format&dpr=1&w=384",
                 ]}
+                name="STREETHERS Genesis"
+                link="https://opensea.io/collection/streethersofficial"
+                counts="799"
               />
             </li>
             <li className={`glide__slide`}>
               <MyCollectionCard
                 imgs={[
-                  "https://images.unsplash.com/photo-1618172193763-c511deb635ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80",
-                  "https://images.unsplash.com/photo-1617791160505-6f00504e3519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-                  "https://images.unsplash.com/photo-1637611331620-51149c7ceb94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-                  "https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
+                  "https://i.seadn.io/gae/Z-qG6XAwitOONv1la3c1Fh5GyWznZfbeaphG8g1cu2G8rKVPFntWfr9QS80I1AkXODX3Fmt066llcbLjggLh8AnR493JK4-XwBbSsuo?auto=format&dpr=1&w=384",
+                  "https://i.seadn.io/gae/pSTsi-I8zeZlpIR-MtkfXj2W3sbLNfEFOtBoialm3f9XVK34Izp6BDUN6zqyBRpDuIIU9Rdzy7CMqvtCgXXrHxFptLTa0Dy75zw?auto=format&dpr=1&w=384",
+                  "https://i.seadn.io/gae/Z-qG6XAwitOONv1la3c1Fh5GyWznZfbeaphG8g1cu2G8rKVPFntWfr9QS80I1AkXODX3Fmt066llcbLjggLh8AnR493JK4-XwBbSsuo?auto=format&dpr=1&w=384",
+                  "https://i.seadn.io/gae/pSTsi-I8zeZlpIR-MtkfXj2W3sbLNfEFOtBoialm3f9XVK34Izp6BDUN6zqyBRpDuIIU9Rdzy7CMqvtCgXXrHxFptLTa0Dy75zw?auto=format&dpr=1&w=384",
                 ]}
+                name="STREETHERS Downtown Villa Pass"
+                link="https://opensea.io/collection/streethers-downtown-villa-pass"
+                counts="544"
               />
             </li>
 

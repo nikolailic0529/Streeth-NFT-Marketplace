@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Heading from "shared/Heading/Heading";
 import Nav from "shared/Nav/Nav";
 import NavItem from "shared/NavItem/NavItem";
@@ -6,6 +6,14 @@ import { ChevronDownIcon } from "@heroicons/react/outline";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import TabFilters from "components/TabFilters";
 import { Transition } from "@headlessui/react";
+import { Network, Alchemy } from "alchemy-sdk";
+
+const settings = {
+  apiKey: "Ii219uc0Xq4cTvkIeQJD-nHwfi84BHJO",
+  network: Network.ETH_MAINNET,
+};
+
+const alchemy = new Alchemy(settings);
 
 export interface HeaderFilterSectionProps {
   className?: string;
@@ -17,9 +25,13 @@ const HeaderFilterSection: FC<HeaderFilterSectionProps> = ({
   const [isOpen, setIsOpen] = React.useState(true);
   const [tabActive, setTabActive] = React.useState("All NFTs");
 
+
+
   return (
     <div className={`flex flex-col relative ${className}`}>
-      <Heading>{"Streethers Genesis NFT collection"}</Heading>
+      <Heading desc="Explore Streethers Genesis, our beloved avatars painting graffiti in the Metaverse">
+        {"Streethers Genesis NFT collection"}
+      </Heading>
       {/* <div className="flex flex-col lg:flex-row lg:items-center justify-between space-y-6 lg:space-y-0 lg:space-x-2 ">
         <Nav
           className="sm:space-x-2"

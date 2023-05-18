@@ -42,14 +42,17 @@ const CardLarge1: FC<CardLarge1Props> = ({
         <div className="nc-CardLarge1__left p-4 sm:p-8 xl:py-14 md:px-10 bg-white dark:bg-neutral-900 shadow-lg rounded-3xl space-y-3 sm:space-y-8 ">
           {/* TITLE */}
           <h2 className="text-2xl lg:text-3xl 2xl:text-5xl font-semibold ">
-            <Link to={"/nft-detailt"} title="Walking On Air">
-              {randomTitle[Math.floor(Math.random() * randomTitle.length)]}
-            </Link>
+            <a
+              href="https://opensea.io/assets/ethereum/0x2b8d14bf74741d33e814978816e7c36b9802e568/252"
+              target="_blank"
+            >
+              Streethers #252
+            </a>
           </h2>
 
           {/* AUTHOR AND COLLECTION */}
           <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-12">
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <div className="flex-shrink-0 h-10 w-10">
                 <Avatar sizeClass="w-10 h-10" />
               </div>
@@ -60,14 +63,19 @@ const CardLarge1: FC<CardLarge1Props> = ({
                   <VerifyIcon />
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="flex items-center">
               <div className="flex-shrink-0 h-10 w-10">
-                <Avatar sizeClass="w-10 h-10" imgUrl={collectionPng} />
+                <Avatar
+                  sizeClass="w-10 h-10"
+                  imgUrl={
+                    "https://i.seadn.io/gae/-iUJnIwxUfieNkRIhVngsMRGLeFbSXhH5RoDDsLRWQDWEDYTNn_I0YrF5f1WQVZCX4Yg4SNfLm_QFUIb4mBRnSgq-qIYM-_3eJLNnw?auto=format&dpr=1&w=256"
+                  }
+                />
               </div>
               <div className="ml-3">
                 <div className="text-xs dark:text-neutral-400">Collection</div>
-                <div className="text-sm font-semibold ">Marscapes</div>
+                <div className="text-sm font-semibold ">STREETHERS Genesis</div>
               </div>
             </div>
           </div>
@@ -76,31 +84,34 @@ const CardLarge1: FC<CardLarge1Props> = ({
           <div className="pt-6">
             <div className="flex flex-col sm:flex-row items-baseline p-6 border-2 border-green-500 rounded-xl relative">
               <span className="block absolute bottom-full translate-y-1.5 py-1 px-1.5 bg-white dark:bg-neutral-900 text-sm text-neutral-500 dark:text-neutral-400 ring ring-offset-0 ring-white dark:ring-neutral-900">
-                Current Bid
+                Current Price
               </span>
               <span className="text-3xl xl:text-4xl font-semibold text-green-500">
-                1.000 ETH
+                2.000 ETH
               </span>
-              <span className="text-lg text-neutral-400 sm:ml-3.5">
+              {/* <span className="text-lg text-neutral-400 sm:ml-3.5">
                 (≈ $3,221.22)
-              </span>
+              </span> */}
             </div>
           </div>
 
           {/* AUTION TIME */}
-          <TimeCountDown />
+          {/* <TimeCountDown /> */}
 
           <div className="w h-[1px] bg-neutral-100 dark:bg-neutral-700"></div>
 
           {/* DESCRIPTION */}
-          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
-            <ButtonPrimary href={"/nft-detailt"} className="flex-1">
+          <a
+            href="https://opensea.io/assets/ethereum/0x2b8d14bf74741d33e814978816e7c36b9802e568/252"
+            target="_blank"
+          >
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+              {/* <ButtonPrimary href={"/nft-detailt"} className="flex-1">
               Place a bid
-            </ButtonPrimary>
-            <ButtonSecondary href={"/nft-detailt"} className="flex-1">
-              View item
-            </ButtonSecondary>
-          </div>
+            </ButtonPrimary> */}
+              <ButtonSecondary className="flex-1">View item</ButtonSecondary>
+            </div>
+          </a>
         </div>
         {/* <div className="p-4 sm:pt-8 sm:px-10 ">
           <NextPrev
@@ -113,17 +124,22 @@ const CardLarge1: FC<CardLarge1Props> = ({
 
       <div className="w-full lg:w-[64%] relative ">
         <div className="nc-CardLarge1__right ">
-          <Link to={"/nft-detailt"}>
+          <a
+            href="https://opensea.io/assets/ethereum/0x2b8d14bf74741d33e814978816e7c36b9802e568/252"
+            target="_blank"
+          >
             <NcImage
               containerClassName="aspect-w-1 aspect-h-1 relative"
               className="absolute inset-0 object-cover rounded-3xl sm:rounded-[40px] border-4 sm:border-[14px] border-white dark:border-neutral-800"
-              src={featuredImgUrl}
+              src={
+                "https://i.seadn.io/gae/D64DlEXdabaYUviwz5KsUv9kcSZlm4zX9BSQFgLdQRkWgRlSSt6vM1NLtbI01F5uIoubD1xocjGxgWKCgx6X_QPIZYIp1Rm8kFFCkg?auto=format&dpr=1&w=1000"
+              }
               alt={"title"}
             />
-          </Link>
+          </a>
 
           {/* META TYPE */}
-          <ItemTypeVideoIcon className="absolute w-8 h-8 md:w-10 md:h-10 left-3 bottom-3 sm:left-7 sm:bottom-7 " />
+          {/* <ItemTypeVideoIcon className="absolute w-8 h-8 md:w-10 md:h-10 left-3 bottom-3 sm:left-7 sm:bottom-7 " /> */}
 
           {/* META FAVORITES */}
           <LikeButton className="absolute right-3 top-3 sm:right-7 sm:top-7" />

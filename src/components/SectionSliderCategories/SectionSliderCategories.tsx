@@ -12,11 +12,11 @@ export interface SectionSliderCategoriesProps {
 }
 
 const ntfsCatNames = [
-  "Arts",
-  "Entertainment",
-  "Music",
-  "News",
-  "Science",
+  "Dank",
+  "Arsek & Erase",
+  "Bustart",
+  "Dragon76",
+  "TBA",
   "Sports",
   "Technology",
 ];
@@ -25,7 +25,7 @@ const nftsDates = ["Q3 2023", "Q4 2023", "TBA", "TBA", "TBA"];
 
 const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
   heading = "Upcoming Streeth NFTs Drops",
-  subHeading = "",
+  subHeading = "Our upcoming collaborations with world renowned street artists. Follow our Medium for up-to-date drops’ info",
   className = "",
   itemClassName = "",
 }) => {

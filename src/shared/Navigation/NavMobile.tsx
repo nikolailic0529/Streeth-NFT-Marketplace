@@ -116,9 +116,9 @@ const NavMobile: React.FC<NavMobileProps> = ({
         {data.map(_renderItem)}
       </ul>
       <div className="flex items-center justify-between py-6 px-5 space-x-2">
-        <ButtonSecondary href={"/connect-wallet"} className="flex-1">
+        <ButtonPrimary href={"/connect-wallet"} className="flex-1">
           Connect Wallet
-        </ButtonSecondary>
+        </ButtonPrimary>
       </div>
     </div>
   );
