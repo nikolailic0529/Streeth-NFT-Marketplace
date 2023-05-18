@@ -12,9 +12,11 @@ import RemainingTimeNftCard from "./RemainingTimeNftCard";
 export interface CardNFT2Props {
   className?: string;
   isLiked?: boolean;
+  item?: any;
 }
 
-const CardNFT2: FC<CardNFT2Props> = ({ className = "", isLiked }) => {
+const CardNFT2: FC<CardNFT2Props> = ({ className = "", isLiked, item }) => {
+
   const renderAvatars = () => {
     return (
       <div className="hidden md:flex -space-x-1.5 ">
@@ -43,30 +45,30 @@ const CardNFT2: FC<CardNFT2Props> = ({ className = "", isLiked }) => {
         <div>
           <NcImage
             containerClassName="flex aspect-w-11 aspect-h-12 w-full h-0 rounded-3xl overflow-hidden z-0"
-            src={nftsImgs[Math.floor(Math.random() * nftsImgs.length)]}
+            src={item?.media[0].thumbnail}
             className="object-cover w-full h-full group-hover:scale-[1.03] transition-transform duration-300 ease-in-out will-change-transform"
           />
         </div>
 
         {/* NFT TYPE */}
-        {Math.random() > 0.5 ? (
+        {/* {Math.random() > 0.5 ? (
           <ItemTypeVideoIcon className="absolute bottom-2.5 right-2.5 w-7 h-7 md:w-9 md:h-9" />
         ) : (
           <ItemTypeImageIcon className="absolute bottom-2.5 right-2.5 w-7 h-7 md:w-9 md:h-9" />
-        )}
+        )} */}
 
         {/* LIKE AND AVATARS */}
-        <div className="absolute top-2.5 left-2.5 z-10 flex items-center space-x-2">
+        {/* <div className="absolute top-2.5 left-2.5 z-10 flex items-center space-x-2">
           <LikeButton liked={isLiked} className=" !h-9" />
           {renderAvatars()}
-        </div>
+        </div> */}
 
         {/* ----TIME--- */}
-        <RemainingTimeNftCard contentClassName="right-5 top-1/2 -translate-y-1/2 pb-1" />
+        {/* <RemainingTimeNftCard contentClassName="right-5 top-1/2 -translate-y-1/2 pb-1" /> */}
 
         <div className="absolute left-[-1px] bottom-[-0.4px] ">
           <svg
-            className="text-white dark:text-neutral-900 w-64 md:w-[281px]"
+            className="text-white dark:text-neutral-900 w-64 md:w-[185px]"
             width="281"
             viewBox="0 0 281 99"
             fill="none"
@@ -78,23 +80,28 @@ const CardNFT2: FC<CardNFT2Props> = ({ className = "", isLiked }) => {
             />
           </svg>
 
-          <div className="absolute left-4 bottom-0 w-48 ">
-            <h2 className={`text-lg font-semibold `}>
-              CloneF #{Math.floor(Math.random() * 1000) + 1000}
-            </h2>
+          <div className="absolute left-1 bottom-4 w-48 ">
+            <h2 className={`text-lg font-semibold `}>{item?.title}</h2>
 
-            <div className="w-full mt-1.5 flex justify-between items-end ">
-              {/* <Prices2 /> */}
+            {/* <Prices2 /> */}
+            {/* <div className="w-full mt-1.5 flex justify-between items-end ">
               <Prices labelTextClassName="bg-white dark:bg-neutral-900 " />
               <span className="block text-neutral-500 dark:text-neutral-400 text-xs">
                 {Math.floor(Math.random() * 90) + 10} in stock
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
 
-      <Link to={"/nft-detailt"} className="absolute inset-0"></Link>
+      <a
+        href={
+          "https://opensea.io/assets/ethereum/0x2b8d14bf74741d33e814978816e7c36b9802e568/" +
+          item?.tokenId
+        }
+        target="_blank"
+        className="absolute inset-0"
+      />
     </div>
   );
 };

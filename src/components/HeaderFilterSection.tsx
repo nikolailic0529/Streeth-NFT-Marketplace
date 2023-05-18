@@ -6,15 +6,6 @@ import { ChevronDownIcon } from "@heroicons/react/outline";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import TabFilters from "components/TabFilters";
 import { Transition } from "@headlessui/react";
-import { Network, Alchemy } from "alchemy-sdk";
-
-const settings = {
-  apiKey: "Ii219uc0Xq4cTvkIeQJD-nHwfi84BHJO",
-  network: Network.ETH_MAINNET,
-};
-
-const alchemy = new Alchemy(settings);
-
 export interface HeaderFilterSectionProps {
   className?: string;
 }
@@ -24,8 +15,6 @@ const HeaderFilterSection: FC<HeaderFilterSectionProps> = ({
 }) => {
   const [isOpen, setIsOpen] = React.useState(true);
   const [tabActive, setTabActive] = React.useState("All NFTs");
-
-
 
   return (
     <div className={`flex flex-col relative ${className}`}>
