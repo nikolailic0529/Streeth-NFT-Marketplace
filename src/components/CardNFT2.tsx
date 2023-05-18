@@ -45,7 +45,7 @@ const CardNFT2: FC<CardNFT2Props> = ({ className = "", isLiked, item }) => {
         <div>
           <NcImage
             containerClassName="flex aspect-w-11 aspect-h-12 w-full h-0 rounded-3xl overflow-hidden z-0"
-            src={item?.media[0].thumbnail}
+            src={item?.rawMetadata.image}
             className="object-cover w-full h-full group-hover:scale-[1.03] transition-transform duration-300 ease-in-out will-change-transform"
           />
         </div>
