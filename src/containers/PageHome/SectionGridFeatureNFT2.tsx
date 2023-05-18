@@ -17,6 +17,7 @@ export interface SectionGridFeatureNFT2Props {}
 
 const SectionGridFeatureNFT2: FC<SectionGridFeatureNFT2Props> = () => {
   const [nfts, setNfts] = useState<any>([]);
+  const [temp, setTemp] = useState<string>("111111");
 
   const getNfts = async (address: string) => {
     // Flag to omit metadata
@@ -28,6 +29,16 @@ const SectionGridFeatureNFT2: FC<SectionGridFeatureNFT2Props> = () => {
     });
     setNfts(nfts);
   };
+
+  const exploreMore = () => {
+    if (temp.length > 90) return;
+    let t = "";
+    for (let i = 0; i < temp.length + 6; i++) {
+      t += "1";
+    }
+    setTemp(t);
+  };
+
   useEffect(() => {
     getNfts("0x2b8d14bf74741d33e814978816e7c36b9802e568");
   }, []);
@@ -36,16 +47,15 @@ const SectionGridFeatureNFT2: FC<SectionGridFeatureNFT2Props> = () => {
     <div className="nc-SectionGridFeatureNFT2 relative">
       <HeaderFilterSection />
       <div className={`grid gap-6 lg:gap-8 sm:grid-cols-2 xl:grid-cols-3`}>
-        {Array.from("111111").map((_, index) => (
-          <CardNFT2
-            key={index}
-            item={nfts[Math.floor(1 + Math.random() * 99)]}
-          />
+        {Array.from(temp).map((_, index) => (
+          <CardNFT2 key={index} item={nfts[index]} />
         ))}
       </div>
-      {/* <div className="flex mt-16 justify-center items-center">
-        <ButtonPrimary loading>Show me more</ButtonPrimary>
-      </div> */}
+      <div className="flex mt-16 justify-center items-center">
+        <ButtonPrimary onClick={() => exploreMore()}>
+          Explore more
+        </ButtonPrimary>
+      </div>
     </div>
   );
 };
