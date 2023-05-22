@@ -33,19 +33,19 @@ function PageHome() {
         {/* SECTION 2 */}
         {/* <SectionHowItWork className="mt-24 lg:mt-40 xl:mt-48" /> */}
 
-        <Marquee className="bg-neutral-100/70 h-[24vw]" speed={180}>
+        <Marquee className="h-[24vw]" speed={180}>
           <div className="font-marquee text-black text-[16vw]">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marketplace&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marketplace
           </div>
         </Marquee>
       </div>
-      <div className="dark:bg-black/20 py-20 lg:py-32">
+      <div className="bg-neutral-100/70 dark:bg-black/20 py-20 lg:py-32">
         <div className="container">
           <SectionSliderNfts />
         </div>
       </div>
       {/* SECTION LAERGE SLIDER */}
-      <div className="bg-neutral-100/70 dark:bg-black/20 py-20 lg:py-32">
+      <div className="dark:bg-black/20 py-20 lg:py-32 pb-0 lg:pb-0">
         <div className="container">
           <SectionLargeSlider />
         </div>
@@ -67,7 +67,12 @@ function PageHome() {
 
         {/* SECTION 4 */}
         {/* <SectionSliderCardNftVideo /> */}
-        <SectionSliderCollections2 cardStyle="style2" />
+        <div className="relative py-20 lg:py-28">
+          <BackgroundSection />
+          <SectionSliderCollections2 cardStyle="style2" />
+        </div>
+      </div>
+      <div className="container relative space-y-24 my-24 lg:space-y-32 lg:my-32">
         {/* SECTION */}
         <div className="relative py-20 lg:py-28">
           <BackgroundSection />
@@ -77,13 +82,13 @@ function PageHome() {
         {/* SECTION */}
 
         {/* SECTION */}
-        <div className="relative py-20 lg:py-28">
+        <div className="relative py-0 mt-0">
           {/* <BackgroundSection className="bg-neutral-100/70 dark:bg-black/20 " /> */}
           <SectionGridFeatureNFT2 />
         </div>
 
         {/* SECTION 1 */}
-        <div className="relative py-20 lg:py-24">
+        <div className="relative py-20 lg:py-24 mt-0">
           <BackgroundSection />
           <SectionSliderCategories />
         </div>
