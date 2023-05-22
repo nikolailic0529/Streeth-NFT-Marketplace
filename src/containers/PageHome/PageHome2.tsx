@@ -39,13 +39,13 @@ function PageHome() {
           </div>
         </Marquee>
       </div>
-      <div className="bg-neutral-100/70 dark:bg-black/20 py-20 lg:py-32">
+      <div className="dark:bg-black/20 py-20 lg:py-32">
         <div className="container">
           <SectionSliderNfts />
         </div>
       </div>
       {/* SECTION LAERGE SLIDER */}
-      <div className="dark:bg-black/20 py-20 lg:py-32 pb-0 lg:pb-0">
+      <div className="bg-neutral-100/70 dark:bg-black/20 py-20 lg:py-32">
         <div className="container">
           <SectionLargeSlider />
         </div>
@@ -67,12 +67,7 @@ function PageHome() {
 
         {/* SECTION 4 */}
         {/* <SectionSliderCardNftVideo /> */}
-        <div className="relative py-20 lg:py-28">
-          <BackgroundSection />
-          <SectionSliderCollections2 cardStyle="style2" />
-        </div>
-      </div>
-      <div className="container relative space-y-24 my-24 lg:space-y-32 lg:my-32">
+        <SectionSliderCollections2 cardStyle="style2" />
         {/* SECTION */}
         <div className="relative py-20 lg:py-28">
           <BackgroundSection />
@@ -82,13 +77,13 @@ function PageHome() {
         {/* SECTION */}
 
         {/* SECTION */}
-        <div className="relative py-0 mt-0">
+        <div className="relative py-20 lg:py-28">
           {/* <BackgroundSection className="bg-neutral-100/70 dark:bg-black/20 " /> */}
           <SectionGridFeatureNFT2 />
         </div>
 
         {/* SECTION 1 */}
-        <div className="relative py-20 lg:py-24 mt-0">
+        <div className="relative py-20 lg:py-24">
           <BackgroundSection />
           <SectionSliderCategories />
         </div>
