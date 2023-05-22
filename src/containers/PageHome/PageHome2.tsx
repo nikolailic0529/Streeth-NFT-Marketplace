@@ -1,5 +1,6 @@
 import React from "react";
 import SectionSliderCategories from "components/SectionSliderCategories/SectionSliderCategories";
+import SectionSliderNfts from "components/SectionSliderNfts/SectionSliderNfts";
 import SectionHowItWork from "components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "components/BackgroundSection/BackgroundSection";
 import BgGlassmorphism from "components/BgGlassmorphism/BgGlassmorphism";
@@ -32,13 +33,17 @@ function PageHome() {
         {/* SECTION 2 */}
         {/* <SectionHowItWork className="mt-24 lg:mt-40 xl:mt-48" /> */}
 
-        <Marquee className="h-[24vw]" speed={180}>
+        <Marquee className="bg-neutral-100/70 h-[24vw]" speed={180}>
           <div className="font-marquee text-black text-[16vw]">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marketplace&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marketplace
           </div>
         </Marquee>
       </div>
-
+      <div className="dark:bg-black/20 py-20 lg:py-32">
+        <div className="container">
+          <SectionSliderNfts />
+        </div>
+      </div>
       {/* SECTION LAERGE SLIDER */}
       <div className="bg-neutral-100/70 dark:bg-black/20 py-20 lg:py-32">
         <div className="container">
