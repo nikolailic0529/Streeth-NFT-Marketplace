@@ -100,21 +100,21 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
           perView: 3,
         },
         1024: {
-          gap: 20,
+          gap: 32,
           perView: 3,
         },
         768: {
-          gap: 20,
-          perView: 3,
+          gap: 32,
+          perView: 2.6,
         },
         640: {
-          gap: 20,
-          perView: 3,
+          gap: 32,
+          perView: 2.3,
         },
         500: {
-          gap: 20,
-          perView: 3,
-        },
+          gap: 32,
+          perView: 1.4,
+        }
       },
     };
 
