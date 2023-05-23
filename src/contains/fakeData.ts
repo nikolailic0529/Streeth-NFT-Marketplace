@@ -42,6 +42,11 @@ import nftsDrop3 from "images/nfts/d3.jpg";
 import nftsDrop4 from "images/nfts/d4.jpg";
 import nftsDrop5 from "images/nfts/d5.jpg";
 
+import nftlogo1 from "images/nfts/arsek2.png";
+import nftlogo2 from "images/nfts/bustart2.png";
+import nftlogo3 from "images/nfts/dank2.png";
+import nftlogo4 from "images/nfts/jorit2.png";
+
 export const nftsCatImgs = [
   nftsCat1,
   nftsCat3,
@@ -57,6 +62,8 @@ export const nftsDrops = [
   nftsDrop4,
   nftsDrop5,
 ];
+
+export const nftsLogos = [nftlogo3, nftlogo1, nftlogo2, null, null];
 export const nftsLargeImgs = [nftsLarge1, nftsLarge2, nftsLarge3];
 export const nftsImgs = [
   nfts1,

@@ -34,6 +34,7 @@ const nfts = [
     price: "15,000,000",
     date: "2021",
     instagram: "arsek_erase",
+    info: "https://artists.streeth.io/arsek-erase/",
   },
   {
     name: "KISSING THE DANUBE",
@@ -44,6 +45,7 @@ const nfts = [
     price: "15,000,000",
     date: "2021",
     instagram: "artofbust",
+    info: "https://artists.streeth.io/bustart/",
   },
   {
     name: "TOKYO DREAMING",
@@ -54,6 +56,7 @@ const nfts = [
     price: "15,000,000",
     date: "2021",
     instagram: "dankitchener",
+    info: "https://artists.streeth.io/dank/",
   },
   {
     name: "SAN GENNARO",
@@ -64,6 +67,7 @@ const nfts = [
     price: "15,000,000",
     date: "2015",
     instagram: "jorit",
+    info: "https://artists.streeth.io/jorit/",
   },
 ];
 
@@ -125,8 +129,6 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
     return () => slider.destroy();
   }, [sliderRef, UNIQUE_CLASS]);
 
-  console.log(nfts[selNft]);
-
   return (
     <div className={`nc-SectionSliderNfts ${className}`}>
       <div className="flex w-4/5 m-auto relative mb-24 flex-col lg:flex-row items-center">
@@ -141,17 +143,19 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
               className="object-cover w-full h-full rounded-2xl"
             />
             <div className="absolute flex items-center">
-              <div className="absolute bg-neutral-100 bottom-6 -ml-6 bg-white flex px-1 gap-1 py-1 rounded-full items-center	">
-                <NcImage
-                  src={nfts[selNft].logo}
-                  className="object-cover lg:w-8 lg:h-8 w-6 h-6"
-                />
-                <span
-                  className={`block text-sm text-neutral-6000 dark:text-neutral-400`}
-                >
-                  @{nfts[selNft].instagram}
-                </span>
-              </div>
+              <a href={nfts[selNft].info} target="_blank">
+                <div className="absolute bg-neutral-100 bottom-6 -ml-6 bg-white flex px-1 gap-1 py-1 rounded-full items-center	">
+                  <NcImage
+                    src={nfts[selNft].logo}
+                    className="object-cover lg:w-8 lg:h-8 w-6 h-6"
+                  />
+                  <span
+                    className={`block text-sm text-neutral-6000 dark:text-neutral-400`}
+                  >
+                    @{nfts[selNft].instagram}
+                  </span>
+                </div>
+              </a>
             </div>
           </div>
         </div>

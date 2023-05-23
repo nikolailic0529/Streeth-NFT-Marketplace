@@ -6,6 +6,7 @@ import images1 from "images/nfts/cat1.webp";
 export interface CardCategory5Props {
   className?: string;
   featuredImage?: string;
+  logo?: any;
   name: string;
   date: string;
   index: number;
@@ -27,6 +28,7 @@ const COLORS = [
 const CardCategory5: FC<CardCategory5Props> = ({
   className = "",
   featuredImage = images1,
+  logo,
   name,
   date,
   index,
@@ -46,7 +48,7 @@ const CardCategory5: FC<CardCategory5Props> = ({
         <span className="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black bg-opacity-10 transition-opacity"></span>
       </div>
       <div className="mt-4 flex items-center">
-        <div className={`w-10 h-10 rounded-full ${COLORS[index]}`}></div>
+        {!logo ? <div className={`w-10 h-10 rounded-full ${COLORS[index]}`}></div> : <img className="w-10 h-10 rounded-full" src={logo}/>}
         <div className="ml-3">
           <h2
             className={`text-base sm:text-lg text-neutral-900 dark:text-neutral-100 font-medium truncate`}

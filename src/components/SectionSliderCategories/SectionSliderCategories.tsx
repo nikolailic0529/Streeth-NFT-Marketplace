@@ -2,7 +2,7 @@ import React, { FC, useEffect, useId, useRef } from "react";
 import Heading from "components/Heading/Heading";
 import Glide from "@glidejs/glide";
 import CardCategory5 from "components/CardCategory5/CardCategory5";
-import { nftsDrops } from "contains/fakeData";
+import { nftsDrops, nftsLogos } from "contains/fakeData";
 
 export interface SectionSliderCategoriesProps {
   className?: string;
@@ -82,6 +82,7 @@ const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
                 <CardCategory5
                   index={index}
                   featuredImage={nftsDrops[index]}
+                  logo={nftsLogos[index]}
                   name={`${ntfsCatNames[index]}`}
                   date={nftsDates[index]}
                 />

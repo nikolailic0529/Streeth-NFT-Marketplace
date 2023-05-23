@@ -42,7 +42,6 @@ const SectionGridFeatureNFT2: FC<SectionGridFeatureNFT2Props> = () => {
   useEffect(() => {
     getNfts("0x2b8d14bf74741d33e814978816e7c36b9802e568");
   }, []);
-  console.log(nfts);
   return (
     <div className="nc-SectionGridFeatureNFT2 relative">
       <HeaderFilterSection />

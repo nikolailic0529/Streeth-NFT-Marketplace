@@ -25,7 +25,6 @@ const CardCategoryNFT: FC<CardCategoryNFTProps> = ({
   className = "",
   item,
 }) => {
-  console.log(item);
   return (
     <div
       className={`nc-CardCategoryNFT flex flex-col ${className} cursor-pointer`}
@@ -43,18 +42,20 @@ const CardCategoryNFT: FC<CardCategoryNFTProps> = ({
           className="object-cover w-full h-full rounded-2xl"
         />
         <div className="absolute flex items-center">
-          <div className="absolute bg-neutral-100 bottom-6 -ml-6 bg-white flex px-1 gap-1 py-1 rounded-full items-center	">
-            {/* <NcImage src={item.logo} className="object-cover w-10 h-10" /> */}
-            <img
-              src={item.logo}
-              className="object-cover lg:w-8 lg:h-8 w-6 h-6"
-            />
-            <span
-              className={`block text-sm text-neutral-6000 dark:text-neutral-400`}
-            >
-              @{item.instagram}
-            </span>
-          </div>
+          <a href={item.info} target="_blank">
+            <div className="absolute bg-neutral-100 bottom-6 -ml-6 bg-white flex px-1 gap-1 py-1 rounded-full items-center	">
+              {/* <NcImage src={item.logo} className="object-cover w-10 h-10" /> */}
+              <img
+                src={item.logo}
+                className="object-cover lg:w-8 lg:h-8 w-6 h-6"
+              />
+              <span
+                className={`block text-sm text-neutral-6000 dark:text-neutral-400`}
+              >
+                @{item.instagram}
+              </span>
+            </div>
+          </a>
         </div>
       </div>
     </div>
