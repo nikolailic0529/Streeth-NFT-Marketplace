@@ -89,6 +89,7 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
     const OPTIONS: Glide.Options = {
       type: "carousel",
       focusAt: "center",
+      startAt: 2,
       perView: 3,
       gap: 32,
       peek: {
@@ -101,20 +102,20 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
         },
         1024: {
           gap: 32,
-          perView: 3,
+          perView: 2.6,
         },
         768: {
           gap: 32,
-          perView: 2.6,
+          perView: 2.3,
         },
         640: {
           gap: 32,
-          perView: 2.3,
+          perView: 2,
         },
         500: {
           gap: 32,
-          perView: 1.4,
-        }
+          perView: 1.7,
+        },
       },
     };
 
@@ -128,9 +129,9 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
 
   return (
     <div className={`nc-SectionSliderNfts ${className}`}>
-      <div className="flex w-4/5 m-auto relative mb-8">
+      <div className="flex w-4/5 m-auto relative mb-24 flex-col lg:flex-row items-center">
         <div
-          className={`flex flex-col ${className} h-[30vw] w-[30vw] cursor-pointer relative`}
+          className={`flex flex-col ${className} h-[70vw] w-[70vw] sm:h-[50vw] sm:w-[50vw] lg:h-[30vw] lg:w-[30vw] cursor-pointer relative`}
         >
           <div
             className={`flex-shrink-0 relative w-full aspect-w-2 aspect-h-2 h-full rounded-2xl group`}
@@ -143,7 +144,7 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
               <div className="absolute bg-neutral-100 bottom-6 -ml-6 bg-white flex px-1 gap-1 py-1 rounded-full items-center	">
                 <NcImage
                   src={nfts[selNft].logo}
-                  className="object-cover w-10 h-10"
+                  className="object-cover lg:w-8 lg:h-8 w-6 h-6"
                 />
                 <span
                   className={`block text-sm text-neutral-6000 dark:text-neutral-400`}
@@ -154,7 +155,7 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
             </div>
           </div>
         </div>
-        <div className="ml-40 flex flex-col justify-center">
+        <div className="mt-12 lg:mt-0 lg:ml-40 flex flex-col justify-center">
           <div className="font-bold text-2xl">{nfts[selNft].name}</div>
           <div className="mt-6 font-semibold text-1xl">Listing Details</div>
           <div className="mt-2 flex gap-12 items-center ">
