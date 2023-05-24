@@ -1,4 +1,5 @@
 import CardLarge1 from "components/CardLarge1/CardLarge1";
+import Heading from "components/Heading/Heading";
 import { nftsLargeImgs } from "contains/fakeData";
 import React, { FC, useState } from "react";
 
@@ -30,19 +31,29 @@ const SectionLargeSlider: FC<SectionLargeSliderProps> = ({
   };
 
   return (
-    <div className={`nc-SectionLargeSlider relative ${className}`}>
-      {[1, 1, 1].map((_, index) =>
-        indexActive === index ? (
-          <CardLarge1
-            key={index}
-            isShowing
-            featuredImgUrl={nftsLargeImgs[index]}
-            onClickNext={handleClickNext}
-            onClickPrev={handleClickPrev}
-          />
-        ) : null
-      )}
-    </div>
+    <>
+      <Heading
+        className="mb-12 lg:mb-14 text-neutral-900 dark:text-neutral-50"
+        fontClass="text-3xl md:text-4xl 2xl:text-5xl font-semibold"
+        isCenter
+        desc=""
+      >
+        Featured NFT Of The Month.
+      </Heading>
+      <div className={`nc-SectionLargeSlider relative ${className}`}>
+        {[1, 1, 1].map((_, index) =>
+          indexActive === index ? (
+            <CardLarge1
+              key={index}
+              isShowing
+              featuredImgUrl={nftsLargeImgs[index]}
+              onClickNext={handleClickNext}
+              onClickPrev={handleClickPrev}
+            />
+          ) : null
+        )}
+      </div>
+    </>
   );
 };
 

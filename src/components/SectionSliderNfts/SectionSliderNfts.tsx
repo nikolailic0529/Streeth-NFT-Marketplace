@@ -173,7 +173,7 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
               <div>{nfts[selNft].artist}</div>
               <div>{nfts[selNft].location}</div>
               <div>{nfts[selNft].date}</div>
-              <div>{nfts[selNft].price}</div>
+              <div>{nfts[selNft].price} <b>STREETH</b></div>
             </div>
           </div>
           <ButtonPrimary className="mt-4" sizeClass="px-4 py-2 sm:px-5">
