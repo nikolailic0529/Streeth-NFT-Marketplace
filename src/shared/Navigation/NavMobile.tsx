@@ -10,6 +10,7 @@ import SocialsList from "shared/SocialsList/SocialsList";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import SwitchDarkMode from "shared/SwitchDarkMode/SwitchDarkMode";
 import ButtonSecondary from "shared/Button/ButtonSecondary";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export interface NavMobileProps {
   data?: NavItemType[];
@@ -116,9 +117,79 @@ const NavMobile: React.FC<NavMobileProps> = ({
         {data.map(_renderItem)}
       </ul>
       <div className="flex items-center justify-between py-6 px-5 space-x-2">
-        <ButtonPrimary href={"/connect-wallet"} className="flex-1">
-          Connect Wallet
-        </ButtonPrimary>
+        <ConnectButton.Custom>
+          {({
+            account,
+            chain,
+            openAccountModal,
+            openChainModal,
+            openConnectModal,
+            authenticationStatus,
+            mounted,
+          }) => {
+            // Note: If your app doesn't use authentication, you
+            // can remove all 'authenticationStatus' checks
+            const ready = mounted && authenticationStatus !== "loading";
+            const connected =
+              ready &&
+              account &&
+              chain &&
+              (!authenticationStatus ||
+                authenticationStatus === "authenticated");
+
+            return (
+              <div
+                {...(!ready && {
+                  "aria-hidden": true,
+                  style: {
+                    opacity: 0,
+                    pointerEvents: "none",
+                    userSelect: "none",
+                  },
+                })}
+              >
+                {(() => {
+                  if (!connected) {
+                    return (
+                      <ButtonPrimary
+                        onClick={openConnectModal}
+                        type="button"
+                        sizeClass="px-4 py-2 sm:px-5"
+                      >
+                        Connect Wallet
+                      </ButtonPrimary>
+                    );
+                  }
+
+                  if (chain.unsupported) {
+                    return (
+                      <ButtonPrimary
+                        onClick={openChainModal}
+                        type="button"
+                        sizeClass="px-4 py-2 sm:px-5"
+                      >
+                        Wrong network
+                      </ButtonPrimary>
+                    );
+                  }
+
+                  return (
+                    <ButtonPrimary
+                      onClick={openAccountModal}
+                      type="button"
+                      sizeClass="px-4 py-2 sm:px-5"
+                    >
+                      {account.displayName}
+                      {account.displayBalance
+                        ? ` (${account.displayBalance})`
+                        : ""}
+                    </ButtonPrimary>
+                  );
+                })()}
+              </div>
+            );
+          }}
+        </ConnectButton.Custom>
       </div>
     </div>
   );

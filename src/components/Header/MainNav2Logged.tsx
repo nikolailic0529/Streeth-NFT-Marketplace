@@ -7,7 +7,7 @@ import AvatarDropdown from "./AvatarDropdown";
 import Input from "shared/Input/Input";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import Navigation from "shared/Navigation/Navigation";
-
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 export interface MainNav2LoggedProps {}
 
 const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
@@ -60,9 +60,83 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
               <NotifyDropdown />
             </div> */}
             <div></div>
-            <ButtonPrimary href="/connect-wallet" sizeClass="px-4 py-2 sm:px-5">
+            <ConnectButton.Custom>
+              {({
+                account,
+                chain,
+                openAccountModal,
+                openChainModal,
+                openConnectModal,
+                authenticationStatus,
+                mounted,
+              }) => {
+                // Note: If your app doesn't use authentication, you
+                // can remove all 'authenticationStatus' checks
+                const ready = mounted && authenticationStatus !== "loading";
+                const connected =
+                  ready &&
+                  account &&
+                  chain &&
+                  (!authenticationStatus ||
+                    authenticationStatus === "authenticated");
+
+                return (
+                  <div
+                    {...(!ready && {
+                      "aria-hidden": true,
+                      style: {
+                        opacity: 0,
+                        pointerEvents: "none",
+                        userSelect: "none",
+                      },
+                    })}
+                  >
+                    {(() => {
+                      if (!connected) {
+                        return (
+                          <ButtonPrimary
+                            onClick={openConnectModal}
+                            type="button"
+                            sizeClass="px-4 py-2 sm:px-5"
+                          >
+                            Connect Wallet
+                          </ButtonPrimary>
+                        );
+                      }
+
+                      if (chain.unsupported) {
+                        return (
+                          <ButtonPrimary
+                            onClick={openChainModal}
+                            type="button"
+                            sizeClass="px-4 py-2 sm:px-5"
+                          >
+                            Wrong network
+                          </ButtonPrimary>
+                        );
+                      }
+
+                      return (
+                        <ButtonPrimary
+                          onClick={openAccountModal}
+                          type="button"
+                          sizeClass="px-4 py-2 sm:px-5"
+                        >
+                          {account.displayName}
+                          {account.displayBalance
+                            ? ` (${account.displayBalance})`
+                            : ""}
+                        </ButtonPrimary>
+                      );
+                    })()}
+                  </div>
+                );
+              }}
+            </ConnectButton.Custom>
+            {/* <ButtonPrimary href="/connect-wallet" sizeClass="px-4 py-2 sm:px-5">
               Connect Wallet
-            </ButtonPrimary>
+            </ButtonPrimary> */}
+            {/* <ConnectButton /> */}
             <div></div>
             {/* <AvatarDropdown /> */}
           </div>
