@@ -5,11 +5,11 @@ export interface LocationStates {
   "/#"?: {};
   "/home2"?: {};
   "/home3"?: {};
-  "/nft-detailt"?: {};
+  "/nft-detail"?: {};
   "/page-collection"?: {};
   "/page-search"?: {};
   "/page-author"?: {};
-  "/page-upload-item"?: {};
+  "/mint"?: {};
   "/home-header-2"?: {};
   "/connect-wallet"?: {};
   "/account"?: {};
