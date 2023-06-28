@@ -17,6 +17,8 @@ import nftlogo2 from "images/nfts/bustart2.png";
 import nftlogo3 from "images/nfts/dank2.png";
 import nftlogo4 from "images/nfts/jorit2.png";
 
+import { useNavigate } from "react-router-dom";
+
 export interface SectionSliderNftsProps {
   className?: string;
   itemClassName?: string;
@@ -84,6 +86,16 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
   const UNIQUE_CLASS = "glidejs" + id.replace(/:/g, "_");
 
   const [selNft, SelectNft] = useState(0);
+
+  const navigate = useNavigate();
+
+  const onPurchase = () => {
+    navigate("/nft-detail", {
+      state: {
+        NFTID: 7,
+      },
+    });
+  };
 
   useEffect(() => {
     if (!sliderRef.current) {
@@ -173,10 +185,16 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
               <div>{nfts[selNft].artist}</div>
               <div>{nfts[selNft].location}</div>
               <div>{nfts[selNft].date}</div>
-              <div>{nfts[selNft].price} <b>STREETH</b></div>
+              <div>
+                {nfts[selNft].price} <b>STREETH</b>
+              </div>
             </div>
           </div>
-          <ButtonPrimary className="mt-4" sizeClass="px-4 py-2 sm:px-5">
+          <ButtonPrimary
+            onClick={() => onPurchase()}
+            className="mt-4"
+            sizeClass="px-4 py-2 sm:px-5"
+          >
             Purchase
           </ButtonPrimary>
         </div>
