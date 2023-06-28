@@ -179,6 +179,13 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
     args: [NFTID],
   });
 
+  const { data: isApproved } = useContractRead({
+    address: process.env.REACT_APP_NFT_ADDRESS as any,
+    abi: NFT_ABI,
+    functionName: "isApprovedForAll",
+    args: [address, process.env.REACT_APP_MARKETPLACE_ADDRESS],
+  });
+
   const { data, writeAsync: buy } = useContractWrite({
     address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
     abi: MARKETPLACE_ABI,
@@ -203,6 +210,13 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
     functionName: "approve",
   });
 
+  const { data: setApprovalForAllData, writeAsync: setApprovalForAll } =
+    useContractWrite({
+      address: process.env.REACT_APP_NFT_ADDRESS as any,
+      abi: NFT_ABI,
+      functionName: "setApprovalForAll",
+    });
+
   const { data: allowanceInfo } = useContractRead({
     address: process.env.REACT_APP_STREETH_ADDRESS as any,
     abi: STREETH_ABI,
@@ -225,6 +239,11 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
       hash: closeTradeData?.hash,
     });
 
+  const { isLoading: isLoadingSetApproval, isSuccess: isSuccessSetApproval } =
+    useWaitForTransaction({
+      hash: setApprovalForAllData?.hash,
+    });
+
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   });
@@ -232,6 +251,12 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
   const handleApprove = async () => {
     await approve?.({
       args: [process.env.REACT_APP_MARKETPLACE_ADDRESS, priceData as any],
+    });
+  };
+
+  const handleSetApprovalForall = async () => {
+    await setApprovalForAll?.({
+      args: [process.env.REACT_APP_MARKETPLACE_ADDRESS, true],
     });
   };
 
@@ -247,9 +272,13 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
 
   const OpenTradeFunc = async () => {
     if (listPrice === "") return;
-    await openTrade?.({
-      args: [NFTID, parseEther(listPrice as any)],
-    });
+    if (!isApproved) {
+      await handleSetApprovalForall();
+    } else {
+      await openTrade?.({
+        args: [NFTID, parseEther(listPrice as any)],
+      });
+    }
   };
 
   const CloseTradeFunc = async () => {
@@ -311,6 +340,18 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
     }
     return () => {};
   }, [isSuccessApprove, isLoadingApprove]);
+
+  useEffect(() => {
+    const openTradeNFT = async () => {
+      await openTrade?.({
+        args: [NFTID, parseEther(listPrice as any)],
+      });
+    };
+    if (isSuccessSetApproval && !isLoadingSetApproval) {
+      openTradeNFT();
+    }
+    return () => {};
+  }, [isSuccessSetApproval, isLoadingSetApproval]);
 
   useEffect(() => {
     if (isSuccess && !isLoading) {
@@ -729,7 +770,8 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
                       onClick={OpenTradeFunc}
                       disabled={isLoadingOpen}
                     >
-                      {isLoadingOpen && _renderLoading()}
+                      {(isLoadingOpen || isLoadingSetApproval) &&
+                        _renderLoading()}
                       Open Trade
                     </button>
                     <button
