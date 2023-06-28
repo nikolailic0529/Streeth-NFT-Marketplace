@@ -3,10 +3,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import React, { FC, Fragment, useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { LocationStates } from "routers/types";
-import {
-  useAccount,
-  useContractRead,
-} from "wagmi";
+import { useAccount, useContractRead } from "wagmi";
 import MARKETPLACE_ABI from "../../abis/MARKETPLACE.json";
 
 // <--- NavItemType --->
@@ -37,14 +34,28 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
   const { address } = useAccount();
 
-  const { data: isWhiteListed } = useContractRead({
+  const {
+    data: isWhiteListed,
+    isError,
+    isLoading,
+    isFetching,
+    isFetched,
+  } = useContractRead({
     address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
     abi: MARKETPLACE_ABI,
     functionName: "isWhitelisted",
     args: [address],
   });
 
-  console.log("IsWhitelisted: ", isWhiteListed);
+  console.log(
+    "IsWhitelisted: ",
+    isWhiteListed,
+    address,
+    isError,
+    isLoading,
+    isFetching,
+    isFetched
+  );
 
   // CLOSE ALL MENU OPENING WHEN CHANGE HISTORY
   const locationPathName = useLocation().pathname;
