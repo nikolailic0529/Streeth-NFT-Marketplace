@@ -475,7 +475,13 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
 
           <div className="mt-8 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
             <ButtonPrimary
-              className="flex-1"
+              className={`flex-1 ${
+                ownerAddress !== undefined &&
+                getAddress(ownerAddress as any) !==
+                  getAddress(address as any) &&
+                !isListed &&
+                "bg-rose-600 hover:bg-rose-700"
+              }`}
               loading={
                 isLoading || isLoadingApprove || isLoadingClose || isLoadingOpen
               }
@@ -530,7 +536,7 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
                 getAddress(ownerAddress as any) !== getAddress(address as any)
                   ? isListed
                     ? "Buy"
-                    : "NFT not listed"
+                    : "Sold Out"
                   : !isListed
                   ? "Open Trade"
                   : "Close Trade"}
