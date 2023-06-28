@@ -5,7 +5,7 @@ import Header2 from "components/Header/Header2";
 
 const SiteHeader = () => {
   let location = useLocation();
-
+  console.log(location);
   return location.pathname === "/home2" ? <Header2 /> : <HeaderLogged />;
 };
 

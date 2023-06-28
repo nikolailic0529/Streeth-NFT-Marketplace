@@ -44,6 +44,8 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
     args: [address],
   });
 
+  console.log("IsWhitelisted: ", isWhiteListed);
+
   // CLOSE ALL MENU OPENING WHEN CHANGE HISTORY
   const locationPathName = useLocation().pathname;
   useEffect(() => {
