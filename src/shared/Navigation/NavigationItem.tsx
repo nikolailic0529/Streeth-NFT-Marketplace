@@ -36,6 +36,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
 
   const {
     data: isWhiteListed,
+    error,
     isError,
     isLoading,
     isFetching,
@@ -49,6 +50,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
 
   console.log(
     "IsWhitelisted: ",
+    error,
     isWhiteListed,
     address,
     isError,
