@@ -87,12 +87,14 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
 
   const [selNft, SelectNft] = useState(0);
 
+  const nftIds = [7, 15, 14, 16];
+
   const navigate = useNavigate();
 
   const onPurchase = () => {
     navigate("/nft-detail", {
       state: {
-        NFTID: 7,
+        NFTID: nftIds[selNft],
       },
     });
   };
