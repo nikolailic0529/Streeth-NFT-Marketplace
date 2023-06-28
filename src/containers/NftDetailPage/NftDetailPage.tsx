@@ -377,7 +377,7 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
               <span className="ml-2.5 text-neutral-500 dark:text-neutral-400 flex flex-col">
                 <span className="text-sm">Collection</span>
                 <span className="text-neutral-900 dark:text-neutral-200 font-medium flex items-center">
-                  <span>{"Streethers"}</span>
+                  <span>{"Origin"}</span>
                   {/* <VerifyIcon iconClass="w-4 h-4" /> */}
                 </span>
               </span>
