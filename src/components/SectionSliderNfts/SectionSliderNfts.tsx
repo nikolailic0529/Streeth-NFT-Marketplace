@@ -230,7 +230,7 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
               <div>{nfts[selNft].location}</div>
               <div>{nfts[selNft].date}</div>
               <div>
-                {parseInt(
+                {!!priceData && parseInt(
                   formatEther(priceData?.[selNft]?.result as bigint)
                 ).toLocaleString()}
                 <b> STREETH</b>
