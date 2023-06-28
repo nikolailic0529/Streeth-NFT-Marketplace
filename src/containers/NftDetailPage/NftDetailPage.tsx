@@ -31,6 +31,7 @@ import { resolveUrl } from "../../utils/resolveUrl";
 import { Disclosure, Dialog, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
 import { getAddress, parseEther, formatEther } from "viem";
+import { Helmet } from "react-helmet";
 
 import nftimage1 from "images/nfts/arsek1.jpg";
 import nftimage2 from "images/nfts/bustart1.jpg";
@@ -147,39 +148,33 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
 
   const { address } = useAccount();
 
-  console.log("NFTID: ", NFTID, process.env.REACT_APP_NFT_ADDRESS);
-
   const { data: tokenURI } = useContractRead({
     address: process.env.REACT_APP_NFT_ADDRESS as any,
     abi: NFT_ABI,
     functionName: "tokenURI",
-    args: [NFTID.toString()],
+    args: [NFTID],
   });
 
   const { data: isListed, refetch: reftchListMap } = useContractRead({
     address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
     abi: MARKETPLACE_ABI,
     functionName: "listedMap",
-    args: [NFTID.toString()],
+    args: [NFTID],
   });
 
   const { data: ownerAddress, refetch } = useContractRead({
     address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
     abi: MARKETPLACE_ABI,
     functionName: "ownerMap",
-    args: [NFTID.toString()],
+    args: [NFTID],
   });
 
   const { data: priceData, refetch: refetchPrice } = useContractRead({
     address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
     abi: MARKETPLACE_ABI,
     functionName: "price",
-    args: [NFTID.toString()],
+    args: [NFTID],
   });
-
-  console.log(ownerAddress, priceData);
-
-  // console.log(ownerAddress, address);
 
   const { data, writeAsync: buy } = useContractWrite({
     address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
@@ -232,37 +227,31 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
   });
 
   const handleApprove = async () => {
-    console.log("approve", metadata);
     await approve?.({
-      args: [
-        process.env.REACT_APP_MARKETPLACE_ADDRESS,
-        parseEther(metadata?.price as any),
-      ],
+      args: [process.env.REACT_APP_MARKETPLACE_ADDRESS, priceData as any],
     });
   };
 
   const handleBuy = async () => {
-    console.log((allowanceInfo as any) < parseEther(metadata?.price as any));
-    if ((allowanceInfo as any) < parseEther(metadata?.price as any)) {
+    if (formatEther(allowanceInfo as any) < formatEther(priceData as any)) {
       await handleApprove();
     } else {
       await buy?.({
-        args: [[NFTID.toString()]],
+        args: [[NFTID]],
       });
     }
   };
 
   const OpenTradeFunc = async () => {
-    console.log(listPrice);
     if (listPrice === "") return;
     await openTrade?.({
-      args: [NFTID.toString(), parseEther(listPrice as any)],
+      args: [NFTID, parseEther(listPrice as any)],
     });
   };
 
   const CloseTradeFunc = async () => {
     await closeTrade?.({
-      args: [NFTID.toString()],
+      args: [NFTID],
     });
   };
 
@@ -281,11 +270,9 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
       const data = await fetch(
         "https://api.coingecko.com/api/v3/simple/price?ids=streeth&vs_currencies=usd"
       );
-      console.log(data);
       if (!ignore) {
         data.json().then((response) => setTokenPrice(response.streeth.usd));
       }
-      console.log(data);
     };
     loadTokenPrice();
     return () => {
@@ -299,13 +286,12 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
     const loadMetadata = async () => {
       setIsMetadataLoading(true);
       const IPFSData = await fetch(resolveUrl(tokenURI as string));
-      console.log(IPFSData);
       if (!ignore) {
         IPFSData.json().then((response) => setMetadata(response));
       }
       setIsMetadataLoading(false);
     };
-    loadMetadata();
+    if (tokenURI) loadMetadata();
     return () => {
       ignore = true;
     };
@@ -314,7 +300,7 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
   useEffect(() => {
     const buyNFT = async () => {
       await buy?.({
-        args: [[NFTID.toString()]],
+        args: [[NFTID]],
       });
     };
     if (isSuccessApprove && !isLoadingApprove) {
@@ -326,6 +312,7 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
   useEffect(() => {
     if (isSuccess && !isLoading) {
       refetch();
+      reftchListMap();
     }
     return () => {};
   }, [isSuccess, isLoading]);
@@ -469,13 +456,13 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
                 Current Price
               </span>
               <span className="text-xl xl:text-2xl font-semibold text-green-500">
-                {formatEther(priceData as any)} STREETH
+                {formatEther((priceData as any) ?? "")} STREETH
               </span>
               <span className="text-lg text-neutral-400 sm:ml-5">
                 ( ≈ $
                 {(
                   parseFloat(tokenPrice) *
-                  parseFloat(formatEther(priceData as any))
+                  parseFloat(formatEther((priceData as any) ?? ""))
                 ).toFixed(3)}
                 )
               </span>
@@ -493,10 +480,13 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
                 isLoading || isLoadingApprove || isLoadingClose || isLoadingOpen
               }
               disabled={
+                ownerAddress !== undefined &&
                 getAddress(ownerAddress as any) !==
-                  getAddress(address as any) && !isListed
+                  getAddress(address as any) &&
+                !isListed
               }
               onClick={() =>
+                ownerAddress &&
                 getAddress(ownerAddress as any) !== getAddress(address as any)
                   ? isListed && handleBuy()
                   : !isListed
@@ -536,7 +526,8 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
               </svg> */}
 
               <span className="ml-2.5">
-                {getAddress(ownerAddress as any) !== getAddress(address as any)
+                {ownerAddress !== undefined &&
+                getAddress(ownerAddress as any) !== getAddress(address as any)
                   ? isListed
                     ? "Buy"
                     : "NFT not listed"
@@ -583,6 +574,9 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
       className={`nc-NftDetailPage  ${className}`}
       data-nc-id="NftDetailPage"
     >
+      <Helmet>
+        <title>Explore NFT || NFT Marketplace</title>
+      </Helmet>
       {/* MAIn */}
       <main className="container mt-11 flex ">
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14">

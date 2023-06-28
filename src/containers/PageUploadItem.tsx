@@ -71,7 +71,7 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
   const [imageFile, setImageFile] = useState("");
   const [fileURL, setFileURL] = useState("");
 
-  const [NFTID, setNFTID] = useState("");
+  const [NFTID, setNFTID] = useState<any | null>(null);
 
   const [isUploading, setIsUploading] = useState(false);
 
@@ -91,8 +91,7 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
     },
     (logs) => {
       const { args } = logs[0] as any;
-      console.log(args.nftID);
-      setNFTID(args.nftID);
+      setNFTID(Number(args.nftID));
       unwatch();
     }
   );
@@ -108,7 +107,6 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
   });
 
   const handleFileChange = (e: any) => {
-    console.log(e.target.files[0]);
     setImageFile(e.target.files[0]);
     setFileURL(URL.createObjectURL(e.target.files[0]));
   };
@@ -130,12 +128,6 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
   };
 
   const handleMintNFT = async () => {
-    navigate("/nft-detail", {
-      state: {
-        NFTID: 7,
-      },
-    });
-
     if (!isValid()) return;
 
     setIsUploading(true);
@@ -166,7 +158,6 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
           latitude,
           longitude,
           date,
-          price,
           description,
         },
         headers: {
@@ -180,11 +171,6 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
       await writeAsync?.({
         args: [tokenURI, parseEther(price as any), true, 10],
       });
-      // console.log("tokenURI :>> ", tokenURI);
-      // const txRes = await marketplace?.mint([tokenURI]);
-      // console.log("txRes :>> ", txRes);
-      // const txReceipt = await txRes.wait();
-      // console.log("txReceipt :>> ", txReceipt);
     } catch (e) {
       console.log("error: ", e);
     }
@@ -192,19 +178,18 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
   };
 
   useEffect(() => {
-    if (isSuccess && !isLoading) {
-      console.log("NFT minted");
+    if (isSuccess && !isLoading && !!NFTID) {
+      console.log("NFT minted", NFTID);
       navigate("/nft-detail", {
         state: {
           NFTID,
         },
       });
     }
-    console.log(isLoading, isSuccess);
     return () => {
       unwatch();
     };
-  }, [isLoading, isSuccess]);
+  }, [isLoading, isSuccess, NFTID, unwatch, navigate]);
 
   return (
     <div
@@ -473,7 +458,7 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
             <div className="pt-2 flex flex-col sm:flex-row space-y-3 sm:space-y-0 space-x-0 sm:space-x-3 ">
               <ButtonPrimary
                 className="flex-1"
-                loading={isLoading || isUploading}
+                loading={isLoading || isUploading || (isSuccess && !NFTID)}
                 onClick={() => handleMintNFT()}
               >
                 Mint NFT
