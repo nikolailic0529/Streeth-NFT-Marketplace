@@ -220,11 +220,10 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
           <div className="mt-10 md:mt-0 space-y-5 sm:space-y-6 md:sm:space-y-8">
             <div>
               <h3 className="text-lg sm:text-2xl font-semibold">
-                Image, Video, Audio, or 3D Model
+                Image
               </h3>
               <span className="text-neutral-500 dark:text-neutral-400 text-sm">
-                File types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV,
-                OGG, GLB, GLTF. Max size: 100 MB
+                File types supported: JPG, PNG, GIF, SVG. Max size: 100 MB
               </span>
               <div className="mt-5 ">
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-neutral-300 dark:border-neutral-6000 border-dashed rounded-xl">
