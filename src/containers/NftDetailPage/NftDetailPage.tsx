@@ -32,6 +32,7 @@ import { Disclosure, Dialog, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
 import { getAddress, parseEther, formatEther } from "viem";
 import { Helmet } from "react-helmet";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import nftimage1 from "images/nfts/arsek1.jpg";
 import nftimage2 from "images/nfts/bustart1.jpg";
@@ -135,6 +136,8 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
     description: string;
   };
 
+  const navigate = useNavigate();
+
   const [tokenPrice, setTokenPrice] = useState("0.001012");
   const [isOpen, setIsOpen] = useState(false);
   const [metadata, setMetadata] = useState<NFTInfo>();
@@ -146,7 +149,7 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
     state: { NFTID },
   } = useLocation();
 
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
 
   const { data: tokenURI } = useContractRead({
     address: process.env.REACT_APP_NFT_ADDRESS as any,
@@ -335,6 +338,10 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
     return () => {};
   }, [isSuccessClose, isLoadingClose]);
 
+  // useEffect(() => {
+  //   if (isDisconnected) navigate("/");
+  // }, [address, isDisconnected]);
+
   const renderSection1 = () => {
     return (
       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
@@ -477,74 +484,126 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
           </div>
 
           <div className="mt-8 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
-            <ButtonPrimary
-              className={`flex-1 ${
-                ownerAddress !== undefined &&
-                getAddress(ownerAddress as any) !==
-                  getAddress(address as any) &&
-                !isListed &&
-                "bg-rose-600 hover:bg-rose-700"
-              }`}
-              loading={
-                isLoading || isLoadingApprove || isLoadingClose || isLoadingOpen
-              }
-              disabled={
-                ownerAddress !== undefined &&
-                getAddress(ownerAddress as any) !==
-                  getAddress(address as any) &&
-                !isListed
-              }
-              onClick={() =>
-                ownerAddress &&
-                getAddress(ownerAddress as any) !== getAddress(address as any)
-                  ? isListed && handleBuy()
-                  : !isListed
-                  ? openModal()
-                  : CloseTradeFunc()
-              }
-            >
-              {/* <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M18.04 13.55C17.62 13.96 17.38 14.55 17.44 15.18C17.53 16.26 18.52 17.05 19.6 17.05H21.5V18.24C21.5 20.31 19.81 22 17.74 22H6.26C4.19 22 2.5 20.31 2.5 18.24V11.51C2.5 9.44001 4.19 7.75 6.26 7.75H17.74C19.81 7.75 21.5 9.44001 21.5 11.51V12.95H19.48C18.92 12.95 18.41 13.17 18.04 13.55Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M2.5 12.4101V7.8401C2.5 6.6501 3.23 5.59006 4.34 5.17006L12.28 2.17006C13.52 1.70006 14.85 2.62009 14.85 3.95009V7.75008"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M22.5588 13.9702V16.0302C22.5588 16.5802 22.1188 17.0302 21.5588 17.0502H19.5988C18.5188 17.0502 17.5288 16.2602 17.4388 15.1802C17.3788 14.5502 17.6188 13.9602 18.0388 13.5502C18.4088 13.1702 18.9188 12.9502 19.4788 12.9502H21.5588C22.1188 12.9702 22.5588 13.4202 22.5588 13.9702Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M7 12H14"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg> */}
+            {isConnected ? (
+              <ButtonPrimary
+                className={`flex-1 ${
+                  ownerAddress !== undefined &&
+                  address !== undefined &&
+                  getAddress(ownerAddress as any) !==
+                    getAddress(address as any) &&
+                  !isListed &&
+                  "bg-rose-600 hover:bg-rose-700"
+                }`}
+                loading={
+                  isLoading ||
+                  isLoadingApprove ||
+                  isLoadingClose ||
+                  isLoadingOpen
+                }
+                disabled={
+                  ownerAddress !== undefined &&
+                  address !== undefined &&
+                  getAddress(ownerAddress as any) !==
+                    getAddress(address as any) &&
+                  !isListed
+                }
+                onClick={() =>
+                  ownerAddress &&
+                  getAddress(ownerAddress as any) !== getAddress(address as any)
+                    ? isListed && handleBuy()
+                    : !isListed
+                    ? openModal()
+                    : CloseTradeFunc()
+                }
+              >
+                <span className="ml-2.5">
+                  {ownerAddress !== undefined &&
+                  address !== undefined &&
+                  getAddress(ownerAddress as any) !== getAddress(address as any)
+                    ? isListed
+                      ? "Buy"
+                      : "Sold Out"
+                    : !isListed
+                    ? "Open Trade"
+                    : "Close Trade"}
+                </span>
+              </ButtonPrimary>
+            ) : (
+              <ConnectButton.Custom>
+                {({
+                  account,
+                  chain,
+                  openAccountModal,
+                  openChainModal,
+                  openConnectModal,
+                  authenticationStatus,
+                  mounted,
+                }) => {
+                  // Note: If your app doesn't use authentication, you
+                  // can remove all 'authenticationStatus' checks
+                  const ready = mounted && authenticationStatus !== "loading";
+                  const connected =
+                    ready &&
+                    account &&
+                    chain &&
+                    (!authenticationStatus ||
+                      authenticationStatus === "authenticated");
 
-              <span className="ml-2.5">
-                {ownerAddress !== undefined &&
-                getAddress(ownerAddress as any) !== getAddress(address as any)
-                  ? isListed
-                    ? "Buy"
-                    : "Sold Out"
-                  : !isListed
-                  ? "Open Trade"
-                  : "Close Trade"}
-              </span>
-            </ButtonPrimary>
+                  return (
+                    <div
+                      {...(!ready && {
+                        "aria-hidden": true,
+                        style: {
+                          opacity: 0,
+                          pointerEvents: "none",
+                          userSelect: "none",
+                        },
+                      })}
+                      className="flex-1"
+                    >
+                      {(() => {
+                        if (!connected) {
+                          return (
+                            <ButtonPrimary
+                              onClick={openConnectModal}
+                              type="button"
+                              className="w-full"
+                            >
+                              Connect Wallet
+                            </ButtonPrimary>
+                          );
+                        }
+
+                        if (chain.unsupported) {
+                          return (
+                            <ButtonPrimary
+                              onClick={openChainModal}
+                              type="button"
+                              className="w-full"
+                            >
+                              Wrong network
+                            </ButtonPrimary>
+                          );
+                        }
+
+                        return (
+                          <ButtonPrimary
+                            onClick={openAccountModal}
+                            type="button"
+                            className="w-full"
+                          >
+                            {account.displayName}
+                            {account.displayBalance
+                              ? ` (${account.displayBalance})`
+                              : ""}
+                          </ButtonPrimary>
+                        );
+                      })()}
+                    </div>
+                  );
+                }}
+              </ConnectButton.Custom>
+            )}
             <ButtonSecondary href={"/"} className="flex-1">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path
