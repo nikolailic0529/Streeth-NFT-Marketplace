@@ -18,8 +18,6 @@ import SectionSliderCollections2 from "components/SectionSliderCollections2";
 import Marquee from "react-fast-marquee";
 
 function PageHome() {
-  console.log("env: ", process.env);
-  
   return (
     <div className="nc-PageHome relative overflow-hidden">
       <Helmet>

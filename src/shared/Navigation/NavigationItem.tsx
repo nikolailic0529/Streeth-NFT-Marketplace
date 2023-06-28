@@ -34,30 +34,12 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
   const { address } = useAccount();
 
-  const {
-    data: isWhiteListed,
-    error,
-    isError,
-    isLoading,
-    isFetching,
-    isFetched,
-  } = useContractRead({
+  const { data: isWhiteListed } = useContractRead({
     address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
     abi: MARKETPLACE_ABI,
     functionName: "isWhitelisted",
     args: [address],
   });
-
-  console.log(
-    "IsWhitelisted: ",
-    error,
-    isWhiteListed,
-    address,
-    isError,
-    isLoading,
-    isFetching,
-    isFetched
-  );
 
   // CLOSE ALL MENU OPENING WHEN CHANGE HISTORY
   const locationPathName = useLocation().pathname;

@@ -456,7 +456,10 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
                 Current Price
               </span>
               <span className="text-xl xl:text-2xl font-semibold text-green-500">
-                {formatEther((priceData as any) ?? "")} STREETH
+                {parseInt(
+                  formatEther((priceData as any) ?? "")
+                ).toLocaleString()}{" "}
+                STREETH
               </span>
               <span className="text-lg text-neutral-400 sm:ml-5">
                 ( ≈ $

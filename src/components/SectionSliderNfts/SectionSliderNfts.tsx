@@ -19,6 +19,18 @@ import nftlogo4 from "images/nfts/jorit2.png";
 
 import { useNavigate } from "react-router-dom";
 
+import {
+  useAccount,
+  useContractRead,
+  useContractReads,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
+import MARKETPLACE_ABI from "../../abis/MARKETPLACE.json";
+import { Abi } from "viem";
+import { formatEther } from "viem";
+
 export interface SectionSliderNftsProps {
   className?: string;
   itemClassName?: string;
@@ -88,6 +100,36 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
   const [selNft, SelectNft] = useState(0);
 
   const nftIds = [7, 15, 14, 16];
+
+  const marketplaceContract = {
+    address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
+    abi: MARKETPLACE_ABI as Abi,
+  };
+
+  const { data: priceData } = useContractReads({
+    contracts: [
+      {
+        ...marketplaceContract,
+        functionName: "price",
+        args: [7],
+      },
+      {
+        ...marketplaceContract,
+        functionName: "price",
+        args: [15],
+      },
+      {
+        ...marketplaceContract,
+        functionName: "price",
+        args: [14],
+      },
+      {
+        ...marketplaceContract,
+        functionName: "price",
+        args: [16],
+      },
+    ],
+  });
 
   const navigate = useNavigate();
 
@@ -188,7 +230,10 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
               <div>{nfts[selNft].location}</div>
               <div>{nfts[selNft].date}</div>
               <div>
-                {nfts[selNft].price} <b>STREETH</b>
+                {parseInt(
+                  formatEther(priceData?.[selNft].result as bigint)
+                ).toLocaleString()}
+                <b> STREETH</b>
               </div>
             </div>
           </div>
