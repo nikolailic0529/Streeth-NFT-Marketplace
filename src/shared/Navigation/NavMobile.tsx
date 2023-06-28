@@ -11,6 +11,8 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import SwitchDarkMode from "shared/SwitchDarkMode/SwitchDarkMode";
 import ButtonSecondary from "shared/Button/ButtonSecondary";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount, useContractRead } from "wagmi";
+import MARKETPLACE_ABI from "../../abis/MARKETPLACE.json";
 
 export interface NavMobileProps {
   data?: NavItemType[];
@@ -21,6 +23,15 @@ const NavMobile: React.FC<NavMobileProps> = ({
   data = NAVIGATION_DEMO_2,
   onClickClose,
 }) => {
+  const { address } = useAccount();
+
+  const { data: isWhiteListed } = useContractRead({
+    address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
+    abi: MARKETPLACE_ABI,
+    functionName: "isWhitelisted",
+    args: [address],
+  });
+
   const _renderMenuChild = (item: NavItemType) => {
     return (
       <ul className="nav-mobile-sub-menu pl-6 pb-1 text-base">
@@ -70,7 +81,28 @@ const NavMobile: React.FC<NavMobileProps> = ({
   };
 
   const _renderItem = (item: NavItemType, index: number) => {
-    return (
+    return !isWhiteListed ? (
+      item.name !== "mint" && (
+        <Disclosure
+          key={item.id}
+          as="li"
+          className="text-neutral-900 dark:text-white"
+        >
+          <a
+            className="flex w-full items-center py-2.5 px-4 font-medium uppercase tracking-wide text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg text-secondary-500"
+            href={item.link || undefined}
+            target="_blank"
+          >
+            <span
+              className={!item.children ? "block w-full" : ""}
+              onClick={onClickClose}
+            >
+              {item.name}
+            </span>
+          </a>
+        </Disclosure>
+      )
+    ) : (
       <Disclosure
         key={item.id}
         as="li"
@@ -79,7 +111,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
         <a
           className="flex w-full items-center py-2.5 px-4 font-medium uppercase tracking-wide text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg text-secondary-500"
           href={item.link || undefined}
-          target="_blank"
+          target={item.name === "mint" ? undefined : "_blank"}
         >
           <span
             className={!item.children ? "block w-full" : ""}

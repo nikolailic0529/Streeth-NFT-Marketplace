@@ -585,7 +585,7 @@ const NftDetailPage: FC<NftDetailPageProps> = ({
             {/* HEADING */}
             <div className="relative">
               {metadata?.image && (
-                <img
+                <NcImage
                   src={resolveUrl(metadata?.image as string)}
                   className="w-full h-full rounded-3xl overflow-hidden sm:w-3/4 sm:h-3/4 m-auto"
                 />

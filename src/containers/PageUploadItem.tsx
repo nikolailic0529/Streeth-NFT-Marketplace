@@ -15,6 +15,7 @@ import {
   useContractWrite,
   usePrepareContractWrite,
   useWaitForTransaction,
+  useAccount,
 } from "wagmi";
 import { watchContractEvent } from "@wagmi/core";
 import { useNavigate } from "react-router-dom";
@@ -57,6 +58,8 @@ const fileTypes = ["JPG", "PNG", "GIF"];
 
 const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
   const navigate = useNavigate();
+
+  const { address, isDisconnected } = useAccount();
 
   const [selected, setSelected] = useState(plans[1]);
   const [name, setName] = useState("");
@@ -190,6 +193,10 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
       unwatch();
     };
   }, [isLoading, isSuccess, NFTID, unwatch, navigate]);
+
+  useEffect(() => {
+    if (isDisconnected) navigate("/");
+  }, [address, isDisconnected]);
 
   return (
     <div

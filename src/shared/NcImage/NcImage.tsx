@@ -26,7 +26,6 @@ const NcImage: FC<NcImageProps> = ({
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const _checkInViewPort = () => {
-    console.log(!_containerRef.current);
     if (!_containerRef.current) return;
     checkInViewIntersectionObserver({
       target: _containerRef.current as any,

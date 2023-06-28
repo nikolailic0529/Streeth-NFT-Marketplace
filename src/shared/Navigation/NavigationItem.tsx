@@ -3,6 +3,11 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import React, { FC, Fragment, useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { LocationStates } from "routers/types";
+import {
+  useAccount,
+  useContractRead,
+} from "wagmi";
+import MARKETPLACE_ABI from "../../abis/MARKETPLACE.json";
 
 // <--- NavItemType --->
 export interface MegamenuItem {
@@ -30,6 +35,14 @@ type NavigationItemWithRouterProps = NavigationItemProps;
 
 const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
+  const { address } = useAccount();
+
+  const { data: isWhiteListed } = useContractRead({
+    address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
+    abi: MARKETPLACE_ABI,
+    functionName: "isWhitelisted",
+    args: [address],
+  });
 
   // CLOSE ALL MENU OPENING WHEN CHANGE HISTORY
   const locationPathName = useLocation().pathname;
@@ -181,9 +194,26 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
 
   // ===================== MENU MAIN MENU =====================
   const renderMainItem = (item: NavItemType) => {
-    return (
+    return !isWhiteListed ? (
+      item.name !== "mint" && (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center text-sm xl:text-base py-2 px-4 rounded-full hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 font-normal text-neutral-700 dark:text-neutral-300"
+          href={item.link || undefined}
+        >
+          {item.name}
+          {item.type && (
+            <ChevronDownIcon
+              className="ml-1 -mr-1 h-4 w-4 text-neutral-400"
+              aria-hidden="true"
+            />
+          )}
+        </a>
+      )
+    ) : (
       <a
-        target="_blank"
+        target={item.name === "mint" ? undefined : "_blank"}
         rel="noopener noreferrer"
         className="inline-flex items-center text-sm xl:text-base py-2 px-4 rounded-full hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 font-normal text-neutral-700 dark:text-neutral-300"
         href={item.link || undefined}

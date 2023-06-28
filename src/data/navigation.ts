@@ -140,4 +140,9 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
     link: "http://www.twitter.com/onstreeth",
     name: "twitter",
   },
+  {
+    id: ncNanoId(),
+    link: "/mint",
+    name: "mint",
+  },
 ];
