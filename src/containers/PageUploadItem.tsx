@@ -12,6 +12,7 @@ import ButtonSecondary from "shared/Button/ButtonSecondary";
 import NcImage from "shared/NcImage/NcImage";
 import axios from "axios";
 import {
+  useContractRead,
   useContractWrite,
   usePrepareContractWrite,
   useWaitForTransaction,
@@ -21,6 +22,8 @@ import { watchContractEvent } from "@wagmi/core";
 import { useNavigate } from "react-router-dom";
 
 import MARKETPLACE_ABI from "../abis/MARKETPLACE.json";
+import NFT_ABI from "../abis/NFT.json";
+
 import { parseEther } from "viem";
 
 export interface PageUploadItemProps {
@@ -74,6 +77,8 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
   const [imageFile, setImageFile] = useState("");
   const [fileURL, setFileURL] = useState("");
 
+  const [tokenURI, setTokenURI] = useState("");
+
   const [NFTID, setNFTID] = useState<any | null>(null);
 
   const [isUploading, setIsUploading] = useState(false);
@@ -98,6 +103,25 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
       unwatch();
     }
   );
+
+  const { data: isApproved } = useContractRead({
+    address: process.env.REACT_APP_NFT_ADDRESS as any,
+    abi: NFT_ABI,
+    functionName: "isApprovedForAll",
+    args: [address, process.env.REACT_APP_MARKETPLACE_ADDRESS],
+  });
+
+  const { data: setApprovalForAllData, writeAsync: setApprovalForAll } =
+    useContractWrite({
+      address: process.env.REACT_APP_NFT_ADDRESS as any,
+      abi: NFT_ABI,
+      functionName: "setApprovalForAll",
+    });
+
+  const { isLoading: isLoadingSetApproval, isSuccess: isSuccessSetApproval } =
+    useWaitForTransaction({
+      hash: setApprovalForAllData?.hash,
+    });
 
   const { data, writeAsync } = useContractWrite({
     address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
@@ -171,9 +195,17 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
 
       const tokenURI = `ipfs://${resJSON.data.IpfsHash}`;
 
-      await writeAsync?.({
-        args: [tokenURI, parseEther(price as any), true, 10],
-      });
+      setTokenURI(tokenURI);
+
+      if (!isApproved) {
+        await setApprovalForAll?.({
+          args: [process.env.REACT_APP_MARKETPLACE_ADDRESS, true],
+        });
+      } else {
+        await writeAsync?.({
+          args: [tokenURI, parseEther(price as any)],
+        });
+      }
     } catch (e) {
       console.log("error: ", e);
     }
@@ -193,6 +225,18 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
       unwatch();
     };
   }, [isLoading, isSuccess, NFTID, unwatch, navigate]);
+
+  useEffect(() => {
+    const mintNFT = async () => {
+      await writeAsync?.({
+        args: [tokenURI, parseEther(price as any)],
+      });
+    };
+    if (isSuccessSetApproval && !isLoadingSetApproval) {
+      mintNFT();
+    }
+    return () => {};
+  }, [isSuccessSetApproval, isLoadingSetApproval]);
 
   useEffect(() => {
     if (isDisconnected) navigate("/");
@@ -219,9 +263,7 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
           <div className="w-full border-b-2 border-neutral-100 dark:border-neutral-700"></div>
           <div className="mt-10 md:mt-0 space-y-5 sm:space-y-6 md:sm:space-y-8">
             <div>
-              <h3 className="text-lg sm:text-2xl font-semibold">
-                Image
-              </h3>
+              <h3 className="text-lg sm:text-2xl font-semibold">Image</h3>
               <span className="text-neutral-500 dark:text-neutral-400 text-sm">
                 File types supported: JPG, PNG, GIF, SVG. Max size: 100 MB
               </span>
@@ -464,7 +506,7 @@ const PageUploadItem: FC<PageUploadItemProps> = ({ className = "" }) => {
             <div className="pt-2 flex flex-col sm:flex-row space-y-3 sm:space-y-0 space-x-0 sm:space-x-3 ">
               <ButtonPrimary
                 className="flex-1"
-                loading={isLoading || isUploading || (isSuccess && !NFTID)}
+                loading={isLoading || isUploading || isLoadingSetApproval || (isSuccess && !NFTID)}
                 onClick={() => handleMintNFT()}
               >
                 Mint NFT

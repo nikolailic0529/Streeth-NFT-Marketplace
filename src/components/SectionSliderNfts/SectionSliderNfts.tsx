@@ -82,7 +82,7 @@ const nfts = [
     date: "2021",
     instagram: "arsek_erase",
     info: "https://artists.streeth.io/arsek-erase/",
-  },  
+  },
 ];
 
 const nftsDates = ["Q3 2023", "Q4 2023", "TBA", "TBA", "TBA"];
@@ -111,22 +111,22 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
       {
         ...marketplaceContract,
         functionName: "price",
-        args: [7],
+        args: [1],
       },
       {
         ...marketplaceContract,
         functionName: "price",
-        args: [15],
+        args: [2],
       },
       {
         ...marketplaceContract,
         functionName: "price",
-        args: [14],
+        args: [3],
       },
       {
         ...marketplaceContract,
         functionName: "price",
-        args: [16],
+        args: [4],
       },
     ],
   });
@@ -230,9 +230,12 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
               <div>{nfts[selNft].location}</div>
               <div>{nfts[selNft].date}</div>
               <div>
-                {!!priceData && parseInt(
-                  formatEther(priceData?.[selNft]?.result as bigint)
-                ).toLocaleString()}
+                {!!priceData &&
+                  parseInt(
+                    formatEther(
+                      (priceData?.[selNft]?.result as bigint) || ("" as any)
+                    )
+                  ).toLocaleString()}
                 <b> STREETH</b>
               </div>
             </div>
