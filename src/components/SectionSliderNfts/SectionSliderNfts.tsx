@@ -40,15 +40,15 @@ export interface SectionSliderNftsProps {
 
 const nfts = [
   {
-    name: "HOME",
-    artist: "Arsek & Erase",
-    location: "Rheinberg, Germany",
-    logo: nftlogo1,
-    image: nftimage1,
-    price: "7,000,000",
+    name: "TOKYO DREAMING",
+    artist: "Dank",
+    location: "London, UK",
+    logo: nftlogo3,
+    image: nftimage3,
+    price: "30,000,000",
     date: "2021",
-    instagram: "arsek_erase",
-    info: "https://artists.streeth.io/arsek-erase/",
+    instagram: "dankitchener",
+    info: "https://artists.streeth.io/dank/",
   },
   {
     name: "KISSING THE DANUBE",
@@ -62,17 +62,6 @@ const nfts = [
     info: "https://artists.streeth.io/bustart/",
   },
   {
-    name: "TOKYO DREAMING",
-    artist: "Dank",
-    location: "London, UK",
-    logo: nftlogo3,
-    image: nftimage3,
-    price: "30,000,000",
-    date: "2021",
-    instagram: "dankitchener",
-    info: "https://artists.streeth.io/dank/",
-  },
-  {
     name: "SAN GENNARO",
     artist: "Jorit",
     location: "Napoli, Italy",
@@ -83,6 +72,17 @@ const nfts = [
     instagram: "jorit",
     info: "https://artists.streeth.io/jorit/",
   },
+  {
+    name: "HOME",
+    artist: "Arsek & Erase",
+    location: "Rheinberg, Germany",
+    logo: nftlogo1,
+    image: nftimage1,
+    price: "7,000,000",
+    date: "2021",
+    instagram: "arsek_erase",
+    info: "https://artists.streeth.io/arsek-erase/",
+  },  
 ];
 
 const nftsDates = ["Q3 2023", "Q4 2023", "TBA", "TBA", "TBA"];
@@ -99,7 +99,7 @@ const SectionSliderNfts: FC<SectionSliderNftsProps> = ({
 
   const [selNft, SelectNft] = useState(0);
 
-  const nftIds = [7, 15, 14, 16];
+  const nftIds = [1, 2, 3, 4];
 
   const marketplaceContract = {
     address: process.env.REACT_APP_MARKETPLACE_ADDRESS as any,
